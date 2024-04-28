@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>Employe Management System</h1>
+   <div id="filter_bar">
+    <div>
+        <span>Filter by department:</span>
+
+    <select name="" id="deparmentName">
+     <option value="select department">select department</option>
+     <option value="hr">hr</option>
+     <option value="finance">finance</option>
+     <option value="marketing">marketing</option>
+     <option value="engineering">engineering</option>
+     <option value="operations">operations</option>
+    </select>
+    </div>
+    <div>
+        <span>Filter by Gender:</span>
+
+        <select name="" id="genderInput">
+            <option value="gender">gender</option>
+           <option value="male">male</option>
+           <option value="female">female</option>
+           <option value="others">others</option>
+       </select>
+    </div>
+    <div>
+        <span>Sort by Salary:</span>
+
+        <select name="" id="salaryInput">
+            <option value="select order">select order</option>
+            <option value="Low to High">Low to High</option>
+            <option value="High to Low">High to Low</option>
+        </select></div>
+   </div>
+    
+   <div id="tableContainer">
+    <table>
+        <thead>
+                <td>S.no</td>
+                <td>Name</td>
+                <td>Gender</td>
+                <td>Department</td>
+                <td>Salary</td>
+        </thead>
+
+        <tbody></tbody>
+    </table>
+    <div id="pagiantion">
+        <button onclick="prev()">Prev</button>
+        <button onclick="next()">Next</button>
+       </div>
+   </div>
+
+   
+
+
+  
+
+</body>
+<script src="index.js"></script>
+</html>
