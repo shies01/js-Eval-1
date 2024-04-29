@@ -5,12 +5,11 @@ async function getData(URL){
    showData(value)
 }
 let tableBody = document.querySelector("tbody");
-let num = 1
  function showData(arr){
      arr.forEach(function(ele){
         let tr = document.createElement("tr");
         let snum = document.createElement("td");
-        snum.innerText = num;
+        snum.innerText = ele.id;
         let name = document.createElement("td");
         name.innerText = ele.name;
         let gender = document.createElement("td");
@@ -22,7 +21,6 @@ let num = 1
 
         tr.append(snum,name,gender,department,salary)
         tableBody.append(tr)
-        num++
      })
  }
 
@@ -35,6 +33,9 @@ departmentSelector.addEventListener("change", function(e){
 
 async function filterDepartment(value){
     tableBody.innerHTML = null;
+    if(value == "select department"){
+        getData(URL)
+    }
    let response = await fetch (`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=1&limit=10&filterBy=department&filterValue=${value}`)
 
    let val = await response.json()
@@ -51,6 +52,9 @@ genderInp.addEventListener("change", function(e){
 
 async function filterGender(val){
   tableBody.innerHTML = null;
+  if(val == "gender"){
+    getData(URL)
+  }
   let response = await fetch(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=1&limit=10&filterBy=gender&filterValue=${val}`)
   let value = await response.json()
   showData(value.data)
@@ -74,6 +78,7 @@ async function sortSalary(val){
    else if(val =="High to Low"){
     result.sort((a,b)=> b.salary - a.salary)
    }
+  
     
    showData(result)
     
@@ -83,9 +88,13 @@ let pageNum = 1
 
 function next(){
     tableBody.innerHTML=null;
-    pageNum ++
+    pageNum++
     if(pageNum >= 1 && pageNum <=10){
-        getData(URL)
+        getData(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=${pageNum}&limit=10`)
+    }
+    else{
+        pageNum = 1;
+        getData(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=${pageNum}&limit=10`)
     }
 }
 
@@ -93,8 +102,13 @@ function prev(){
     tableBody.innerHTML = null;
     pageNum--
     if(pageNum >= 1 && pageNum <=10){
-        getData(URL)
+        getData(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=${pageNum}&limit=10`)
     }
+    else{
+        pageNum = 1;
+        getData(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees?page=${pageNum}&limit=10`)
+        alert("This is the first page use next button to go to the next page")
+}
 }
 
                  
